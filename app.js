@@ -4,6 +4,7 @@ const ejs = require('ejs');
 
 const app = express();
 
+let item = [];
 // setting it up for view folder so it can look out through views folder
 app.set('view engine', 'ejs');
 
@@ -11,44 +12,38 @@ app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 
+
+
 app.get("/", function (req, res) {
 
+    let today = new Date();
 
+    let options = {
+        weekday: "long",
+        day: "numeric",
+        month: "long"
+    };
 
-    var today = new Date();
-    var day = "";
-    var currentDay = today.getDay();
-
-    switch (currentDay) {
-        case 1:
-            day = "Monday";
-            break;
-        case 2:
-            day = "Tuesday";
-            break;
-        case 3:
-            day = "Wednesday";
-            break;
-        case 4:
-            day = "Thursday";
-            break;
-        case 5:
-            day = "Friday";
-            break;
-        case 6:
-            day = "Satuarday";
-        case 0:
-            day = "Sunday";
-
-        default:
-            break;
-    }
-
+    let day = today.toLocaleDateString("en-US", options);
 
     // render ejs
-    res.render("list", { kindOfDay: day });
+    res.render("list", { kindOfDay: day, newItem: item });
 
 });
+
+app.post("/", function (req, res) {
+
+    let items = req.body.task;
+
+    
+    item.push(items);
+    
+
+    res.redirect("/");
+
+});
+
+
 
 
 

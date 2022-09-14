@@ -1,5 +1,8 @@
 body {
     text-align: center;
+    background-color: #FFE9A0;
+    min-height: 1000px;
+    background-image: -webkit-linear-gradient(65deg,#A683E3 50%, #E4E9FD 50%);
 }
 
 .heading {
@@ -8,6 +11,65 @@ body {
     margin-right: 15%;
     text-align: center;
     color: blueviolet;
-    font-size: 1.3rem;
+    font-size: 2rem;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+.list {
+   
+
+}
+
+.items-here {
+    margin: 3%;
+    font-size: 20px;
+    font-family: sans-serif;
+    line-height: 2;
+    display: flex;
+    border-bottom: 1px solid rgb(18, 228, 228);
+
+}
+
+.input-text {
+    margin-right: 50px;
+    margin-left: 20px;
+}
+
+.containers {
+
+    /* margin: 7% 40%; */
+    text-align: left;
+    max-width: 400px;
+    
+    background-color: aliceblue;
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    box-shadow: 5px 5px 15px -5px rgb(0,0,0,0.3);
+}
+
+@media (max-width:900px){
+    .form {
+        padding-top: 7%;
+        text-align: center;
+    }
+}
+
+/* button */
+.add-btn {
+    margin: 3%;
+}
+
+
+/* checkbox */
+.checkit {
+    margin: 7%;
+}
+
+
+input:checked+p{
+    text-decoration: line-through;
+    text-decoration-color: #A683E3;
+}
+

@@ -1,38 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<%- include ("header") -%> 
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
+<div class="date-time">
+    <h1 class="heading">
+        <%= kindOfDay %>
+    </h1>
+</div>
 
-<body>
-    <!-- <h1>It's a <%= kindOfDay %> !</h1> -->
+<div class="containers ">
 
-    <% if (kindOfDay=="Sunday" || kindOfDay=="Satuarday" ) { %>
-        <div class="heading">
-            <h1 style="color:greenyellow ;"> <%= kindOfDay %>
-            </h1>
-        </div>
-        <% } else { %>
-            <div class="heading">
-                <h1 style="color: blue;"><%= kindOfDay %>
-                </h1>
+
+    <div class="list">
+
+
+        <% for( let i=0; i < newItem.length; i++ ) { %>
+            <div class="items-here">
+                <input style="margin-right: 7%;" type="checkbox" name="check" id="checkit">
+                <p>
+                    <%= newItem[i] %>
+                </p>
+
             </div>
+
             <% } %>
 
 
+    </div>
+
+
+    <div class="form">
 
 
 
+        <form action="/" method="post">
+            <label style="font-size: 18px; margin: 3%;" for="takingInput">Task</label>
+            <input class="input-text" type="text" name="task" placeholder="Enter your task here" id="takingInput"
+                autocomplete="off">
+
+
+            <button class="btn btn-success add-btn" type="submit" name="posting">
+                <i class="fa-solid fa-plus"></i>Add</button>
 
 
 
+        </form>
 
+    </div>
+</div>
 
-</body>
-
-</html>
+<%- include ("footer") -%> 
