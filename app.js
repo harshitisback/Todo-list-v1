@@ -71,7 +71,7 @@ app.use(express.static("public"));
 
 
 
-app.get("/favicon.ico", function (req, res) {
+app.get("/", function (req, res) {
    
 
     todoModel.find(function (err, result) {
@@ -120,7 +120,7 @@ app.get("/favicon.ico", function (req, res) {
 // })
 
 
-app.post("/favicon.ico", function (req, res) {
+app.post("/", function (req, res) {
 
     let itemz = req.body.task;
     let listname = req.body.posting;
