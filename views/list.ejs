@@ -1,50 +1,54 @@
-<%- include ("header") -%> 
+<%- include ("header") -%>
 
-<div class="date-time">
-    <h1 class="heading">
-        <%= kindOfDay %>
-    </h1>
-</div>
-
-<div class="containers ">
-
-
-    <div class="list">
-
-
-        <% for( let i=0; i < newItem.length; i++ ) { %>
-            <div class="items-here">
-                <input style="margin-right: 7%;" type="checkbox" name="check" id="checkit">
-                <p>
-                    <%= newItem[i] %>
-                </p>
-
-            </div>
-
-            <% } %>
-
-
+    <div class="date-time">
+        <h1 class="heading">
+            <%= kindOfDay %>
+        </h1>
     </div>
 
-
-    <div class="form">
-
+    <div class="containers ">
 
 
-        <form action="/" method="post">
-            <label style="font-size: 18px; margin: 3%;" for="takingInput">Task</label>
-            <input class="input-text" type="text" name="task" placeholder="Enter your task here" id="takingInput"
-                autocomplete="off">
+        <div class="list">
 
 
-            <button class="btn btn-success add-btn" type="submit" name="posting">
-                <i class="fa-solid fa-plus"></i>Add</button>
+            <% for( let i=0; i < newItem.length; i++ ) { %>
+
+                <form action="/delete" method="post">
+                    <div class="items-here">
+                        <input style="margin-right: 7%;" type="checkbox" name="check" value=<%= newItem[i].id %>  id="checkit" onChange="this.form.submit()" >
+                        <p>
+                            <%= newItem[i].name %>
+                        </p>
+
+                    </div>
+                </form>
+
+                <% } %>
 
 
 
-        </form>
+        </div>
 
+
+        <div class="form">
+
+
+
+            <form action="/" method="post">
+                <label style="font-size: 18px; margin: 3%;" for="takingInput">Task</label>
+                <input class="input-text" type="text" name="task" placeholder="Enter your task here" id="takingInput"
+                    autocomplete="off">
+
+
+                <button class="btn btn-success add-btn" type="submit" name="posting" value=<%=kindOfDay %> >
+                    <i class="fa-solid fa-plus"></i>Add</button>
+
+
+
+            </form>
+
+        </div>
     </div>
-</div>
 
-<%- include ("footer") -%> 
+    <%- include ("footer") -%>
