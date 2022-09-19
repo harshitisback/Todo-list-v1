@@ -9,7 +9,7 @@ let day = date.getDate();
 
 
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/TODOlistDB');
+mongoose.connect('mongodb+srv://amankumartiwari1502:Harsh9575381459@cluster0.2ur35sv.mongodb.net/TODOlistDB');
 
 const app = express();
 
