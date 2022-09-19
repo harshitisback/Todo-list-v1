@@ -5,6 +5,7 @@ const date = require(__dirname + '/date.js');
 
 // let item = [];
 let workItem = [];
+let day = date.getDate();
 
 
 const mongoose = require('mongoose');
@@ -38,6 +39,16 @@ const item3 = new todoModel({
 
 let defaultArr = [item1, item2, item3];
 
+
+var ListSchema = new Schema({
+    name: String,
+    items: [TodoSchema]
+});
+
+var ListModel = mongoose.model("lists", ListSchema);
+
+
+
 // todoModel.insertMany(defaultArr, function (err) { 
 //     if(err){
 //         console.log(err);
@@ -61,7 +72,7 @@ app.use(express.static("public"));
 
 
 app.get("/", function (req, res) {
-    let day = date.getDate();
+   
 
     todoModel.find(function (err, result) {
         if (err) {
@@ -76,34 +87,61 @@ app.get("/", function (req, res) {
 
 });
 
-app.get("/work", function (req, res) {
+app.get("/:listtitle", function (req, res) {
 
-    res.render("list", { kindOfDay: "Work", newItem: workItem });
+    let customeListName = req.params.listtitle;
+
+   
+
+    ListModel.findOne({name: customeListName}, function (err, foundList) { 
+        if(!err){
+            if(!foundList){
+                const lists = new ListModel({
+                    name:customeListName,
+                    items:defaultArr 
+                });
+                lists.save();
+                res.redirect("/"+customeListName);
+            }else{
+                
+                res.render("list",{kindOfDay:foundList.name, newItem:foundList.items});
+            }
+        }else{
+            console.log(err);
+        }
+     })
+        
+ 
+
+
+
+
+    // res.render("list", { kindOfDay: customeListName, newItem: workItem });
 })
 
 
 app.post("/", function (req, res) {
 
-    let items = req.body.task;
+    let itemz = req.body.task;
+    let listname = req.body.posting;
 
-    if (req.body.posting === "Work") {
-        workItem.push(items);
-        res.redirect("/work");
-    } else {
-        console.log(req.body);
-        const item = new todoModel({
-            name: items
-        })
+    const item = new todoModel({
+        name: itemz
+    })
+
+    
+
+ 
         item.save();
         // item.push(items);
         res.redirect("/");
-    }
+    
 
 
 });
 
 app.post("/delete", function (req, res) { 
-    console.log(req.body.check);
+
     let itemId = req.body.check;
 
     todoModel.deleteOne({_id: itemId}, function (err) { 
