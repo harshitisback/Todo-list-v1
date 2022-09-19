@@ -87,37 +87,37 @@ app.get("/", function (req, res) {
 
 });
 
-app.get("/:listtitle", function (req, res) {
+// app.get("/:listtitle", function (req, res) {
 
-    let customeListName = req.params.listtitle;
+//     let customeListName = req.params.listtitle;
 
    
 
-    ListModel.findOne({name: customeListName}, function (err, foundList) { 
-        if(!err){
-            if(!foundList){
-                const lists = new ListModel({
-                    name:customeListName,
-                    items:defaultArr 
-                });
-                lists.save();
-                res.redirect("/"+customeListName);
-            }else{
+//     ListModel.findOne({name: customeListName}, function (err, foundList) { 
+//         if(!err){
+//             if(!foundList){
+//                 const lists = new ListModel({
+//                     name:customeListName,
+//                     items:defaultArr 
+//                 });
+//                 lists.save();
+//                 res.redirect("/"+customeListName);
+//             }else{
                 
-                res.render("list",{kindOfDay:foundList.name, newItem:foundList.items});
-            }
-        }else{
-            console.log(err);
-        }
-     })
+//                 res.render("list",{kindOfDay:foundList.name, newItem:foundList.items});
+//             }
+//         }else{
+//             console.log(err);
+//         }
+//      })
         
  
 
 
 
 
-    // res.render("list", { kindOfDay: customeListName, newItem: workItem });
-})
+//     // res.render("list", { kindOfDay: customeListName, newItem: workItem });
+// })
 
 
 app.post("/", function (req, res) {
@@ -127,7 +127,7 @@ app.post("/", function (req, res) {
 
     const item = new todoModel({
         name: itemz
-    })
+    });
 
     
 
